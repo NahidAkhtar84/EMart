@@ -1,8 +1,9 @@
 
 from django.contrib import admin
 from django.urls import path
-from .views import index, signup
+from .views import home, signup, login
 urlpatterns = [
-    path('', index, name='homepage'),
-    path('signup', signup),
+    path('', home.index, name='homepage'),
+    path('signup', signup.SignUp.as_view(), name="signup"),
+    path('login', login.Login.as_view(), name="login")
 ]
