@@ -16,3 +16,10 @@ class Customer(models.Model):
             return True
         else:
             return False
+
+    @staticmethod
+    def loginCustomer(email):
+        try:
+            return Customer.objects.get(email = email)
+        except:
+            return False
