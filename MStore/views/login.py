@@ -13,9 +13,11 @@ class Login(View):
         password = request.POST.get('password')
         error_message = None
         customer = Customer.loginCustomer(email)
-        print(customer)
+
         if customer:
             if check_password(password, customer.password):
+                request.session["customer_id"] = customer.id
+                request.session["fname"] = customer.first_name
                 return redirect('homepage')
             else:
                 error_message = "Email or Password is Invalid!!!"
@@ -23,3 +25,9 @@ class Login(View):
             error_message = "Email or Password is Invalid!!!"
 
         return render(request, 'login.html', {'error': error_message})
+    
+    
+#logout
+def logout(request):
+    request.session.clear()
+    return redirect('login')

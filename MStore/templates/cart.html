@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% load custom_filter %}
+{% block content%}
+
+
+<div class="container mt-5">
+    <div class="card border-primary">
+        <div class="card-body">
+            <h4 class="card-title">MStore Cart</h4>
+            <p class="card-text">Your Cart Details</p>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>sl no.</th>
+                    <th>Image</th>
+                    <th>Produc Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in cproducts%}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><img style="height: 47px" src="{{product.image.url}}" alt=""></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price|currency_sign }}</td>
+                    <td>{{ product|cart_product_quantity:request.session.cart }}</td>
+                    <td>{{ product|quantity_price_multiplication:request.session.cart|currency_sign }}</td>
+                </tr>
+                {% endfor %}
+                <tfoot>
+                <th colspan="5">Total</th>
+                <th>{{ cproducts|total_cart_price:request.session.cart|currency_sign }}</th>
+                </tfoot>
+                </tbody>
+            </table>
+          <div class="m-3 p-3">
+            <a href="#" class="btn btn-outline-primary col-lg-3 float-right">Check Out</a>
+          </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
