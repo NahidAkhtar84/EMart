@@ -39,11 +39,45 @@
                 </tbody>
             </table>
           <div class="m-3 p-3">
-            <a href="#" class="btn btn-outline-primary col-lg-3 float-right">Check Out</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-outline-primary col-lg-3 float-right">Check Out</a>
           </div>
 
         </div>
     </div>
 </div>
 
+
+<!--Check Out Modal-->
+
+<!-- Modal -->
+<div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Checkout Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/check-out" method="POST">
+            {% csrf_token %}
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone" >
+          </div>
+          <br>
+          <div class="form-group">
+          <label for="address">Address</label>
+            <input type="text" name="address" id="address" class="form-control" placeholder="Your Address">
+          </div>
+          <br>
+          <br>
+          <input type="submit" class="btn btn-outline-primary col-lg-6" value="Check Out">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
